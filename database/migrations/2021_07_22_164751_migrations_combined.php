@@ -15,7 +15,8 @@ class MigrationsCombined extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->text('name');
+            $table->string('name', 256);
+            $table->unique('name');
         });
 
         Schema::create('products', function (Blueprint $table) {
@@ -39,6 +40,11 @@ class MigrationsCombined extends Migration
         Schema::table('products', function (Blueprint $table) {
             $table->dropForeign(['brand_id']);
         });
+
+        Schema::table('brands', function (Blueprint $table) {
+            $table->dropUnique(['name']);
+        });
+
         Schema::dropIfExists('products');
         Schema::dropIfExists('brands');
     }
