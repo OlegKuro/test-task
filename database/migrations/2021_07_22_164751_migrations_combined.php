@@ -24,7 +24,7 @@ class MigrationsCombined extends Migration
             $table->text('name');
             $table->decimal('price', 14, 2);
             $table->foreignId('brand_id')
-                ->nullable(false)
+                ->nullable()
                 ->constrained()
                 ->onDelete('cascade');
         });

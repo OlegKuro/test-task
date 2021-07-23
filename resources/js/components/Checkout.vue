@@ -11,6 +11,8 @@
             <v-text-field
                 v-model="form.name"
                 :disabled="isTryingToSubmit"
+                :error-messages="getErrors('name')"
+                @input="resetError('name')"
                 label="Your name"
                 hide-details="auto"
                 dense
@@ -20,6 +22,8 @@
             <v-text-field
                 v-model="form.address"
                 :disabled="isTryingToSubmit"
+                :error-messages="getErrors('address')"
+                @input="resetError('address')"
                 label="Your address"
                 dense
                 hide-details="auto"
@@ -29,6 +33,8 @@
             <v-select
                 v-model="form.shipping"
                 :disabled="isTryingToSubmit"
+                :error-messages="getErrors('shippingPrice')"
+                @input="resetError('shippingPrice')"
                 :hint="`${form.shipping.label}, ${form.shipping.price} EUR`"
                 :items="shippingOptions"
                 item-text="label"
@@ -47,6 +53,8 @@
             <v-text-field
                 v-model="form.cardHolder"
                 :disabled="isTryingToSubmit"
+                :error-messages="getErrors('cardHolder')"
+                @input="resetError('cardHolder')"
                 label="Card holder"
                 dense
                 hide-details="auto"
@@ -56,6 +64,8 @@
             <v-text-field
                 v-model="form.cardNumber"
                 :disabled="isTryingToSubmit"
+                :error-messages="getErrors('cardNumber')"
+                @input="resetError('cardNumber')"
                 label="Card number"
                 dense
                 hide-details="auto"
@@ -65,6 +75,8 @@
             <v-text-field
                 v-model="form.month"
                 :disabled="isTryingToSubmit"
+                :error-messages="getErrors('month')"
+                @input="resetError('month')"
                 label="Month"
                 type="number"
                 min="1"
@@ -77,6 +89,8 @@
             <v-text-field
                 v-model="form.year"
                 :disabled="isTryingToSubmit"
+                :error-messages="getErrors('year')"
+                @input="resetError('year')"
                 label="Year"
                 type="number"
                 min="1950"
@@ -88,6 +102,8 @@
             <v-text-field
                 v-model="form.securityCode"
                 :disabled="isTryingToSubmit"
+                :error-messages="getErrors('securityCode')"
+                @input="resetError('securityCode')"
                 label="Security code"
                 type="number"
                 min="100"
@@ -120,10 +136,14 @@
 </template>
 
 <script>
-    import CheckoutForm from "../forms/checkoutForm";
+    import CheckoutForm from '../forms/checkoutForm';
+    import hasLaravelValidation from '../mixins/hasLaravelValidation';
 
     export default {
         name: "Checkout",
+        mixins: [
+            hasLaravelValidation,
+        ],
         data() {
             return {
                 isTryingToSubmit: false,
@@ -155,12 +175,17 @@
                 this.form = new CheckoutForm();
             },
             async submit() {
-                console.log(this.form);
                 this.isTryingToSubmit = true;
-                setTimeout(() => {
+                const url = `products/${this.productId}/checkout`;
+                try {
+                    await this.$axios.post(url, this.form.preparedForApi());
+                    this.$router.replace({name: 'products'});
+                } catch (e) {
+                    this.errors = e.response.data.errors;
+                } finally {
                     this.isTryingToSubmit = false;
-                }, 3000);
-            }
+                }
+            },
         }
     }
 </script>

@@ -77,7 +77,7 @@
                         page: this.options.page,
                         per_page: this.options.itemsPerPage,
                     };
-                    const {data} = await this.$axios.get('api/products', {params});
+                    const {data} = await this.$axios.get('products', {params});
                     this.items = data.data;
                     this.totalItemsCount = data.meta.total;
                     this.options.page = data.meta.current_page;

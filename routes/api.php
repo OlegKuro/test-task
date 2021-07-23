@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\CheckoutsController;
 use App\Http\Controllers\API\ProductsController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,4 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/products/{product}/checkout', [CheckoutsController::class, 'store']);
 Route::get('/products', [ProductsController::class, 'index']);

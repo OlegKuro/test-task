@@ -31,6 +31,8 @@ Vue.use(VueRouter);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('vue-app', App);
+
+axios.defaults.baseURL = '/api/';
 Vue.prototype.$axios = axios;
 
 /**

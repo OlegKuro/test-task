@@ -19,6 +19,8 @@ class Product extends Model
     public $timestamps = false;
 
     /**
+     * Product brand, null value is possible
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function brand()

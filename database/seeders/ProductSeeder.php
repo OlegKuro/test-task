@@ -16,7 +16,7 @@ class ProductSeeder extends Seeder
     {
         Brand::factory()
             ->count(100)
-            ->hasProducts(10)
+            ->hasProducts(5)
             ->create();
     }
 }
