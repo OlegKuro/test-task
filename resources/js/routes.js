@@ -1,5 +1,6 @@
 import App from "./components/App";
 import ProductsIndex from "./components/ProductsIndex";
+import Checkout from "./components/Checkout";
 
 export default [
     {
@@ -16,6 +17,11 @@ export default [
                 name: 'products',
                 component: ProductsIndex,
             },
+            {
+                path: 'checkout',
+                name: 'checkout',
+                component: Checkout,
+            }
         ],
     },
 ]

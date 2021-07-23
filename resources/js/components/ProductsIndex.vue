@@ -14,7 +14,18 @@
                     nextIcon: 'mdi-arrow-right',
                  }"
                 fixed-header
-            ></v-data-table>
+            >
+                <template v-slot:item.actions="{item}">
+                    <v-btn
+                        color="primary"
+                        @click="goToCheckout(item)"
+                        outlined
+                        dense
+                    >
+                        BUY
+                    </v-btn>
+                </template>
+            </v-data-table>
         </v-card>
     </v-container>
 </template>
@@ -48,9 +59,9 @@
                         value: 'price',
                     },
                     {
-                        test: 'Actions',
+                        text: 'Actions',
                         sortable: false,
-                        value: 'id',
+                        value: 'actions',
                     }
                 ],
             }
@@ -74,6 +85,10 @@
                 } finally {
                     this.isLoading = false;
                 }
+            },
+            goToCheckout(item) {
+                const productId = item.id;
+                this.$router.push({name: 'checkout', params: {productId}});
             }
         },
         watch: {
