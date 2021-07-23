@@ -9,7 +9,7 @@ export default class {
             label: 'free standard',
         };
         this.cardHolder = '';
-        this.cardNumber = '0000 0000 0000 0000';
+        this.cardNumber = '';
         this.month = '12';
         this.year = '2021';
         this.securityCode = '999';

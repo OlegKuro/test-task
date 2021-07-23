@@ -2030,6 +2030,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2358,7 +2359,7 @@ var _default = /*#__PURE__*/function () {
       label: 'free standard'
     };
     this.cardHolder = '';
-    this.cardNumber = '0000 0000 0000 0000';
+    this.cardNumber = '';
     this.month = '12';
     this.year = '2021';
     this.securityCode = '999';
@@ -21702,6 +21703,7 @@ var render = function() {
             attrs: {
               disabled: _vm.isTryingToSubmit,
               "error-messages": _vm.getErrors("cardNumber"),
+              placeholder: "0000 0000 0000 0000",
               label: "Card number",
               dense: "",
               "hide-details": "auto"

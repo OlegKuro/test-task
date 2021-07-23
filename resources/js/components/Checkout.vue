@@ -65,6 +65,7 @@
                 v-model="form.cardNumber"
                 :disabled="isTryingToSubmit"
                 :error-messages="getErrors('cardNumber')"
+                placeholder="0000 0000 0000 0000"
                 @input="resetError('cardNumber')"
                 label="Card number"
                 dense
